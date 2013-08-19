@@ -40,6 +40,6 @@ RUN mv $APACHE_TOMCAT_NAME /usr/local/share
 #
 # Get the latest version of the CollectionSpace source for the version specified in the environment variable $COLLECTIONSPACE_VERSION
 #
-RUN cd $HOME/$CSPACE_USERNAME/src/services && git checkout && git pull
-RUN cd $HOME/$CSPACE_USERNAME/src/application && git checkout && git pull
-RUN cd $HOME/$CSPACE_USERNAME/src/ui && git checkout && git pull
+RUN cd $HOME/$CSPACE_USERNAME/src/services && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
+RUN cd $HOME/$CSPACE_USERNAME/src/application && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
+RUN cd $HOME/$CSPACE_USERNAME/src/ui && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
