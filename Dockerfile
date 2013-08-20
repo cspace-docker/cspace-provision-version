@@ -14,7 +14,7 @@ ENV CSPACE_JEESERVER_HOME $CATALINA_HOME
 #
 # Add the environment variables to the /etc/environment system file
 #
-RUN ./add-env-vars.sh $CATALINA_HOME_PARENT $CATALINA_HOME $CATALINA_PID $CATALINA_OPTS $CSPACE_JEESERVER_HOME
+RUN ./add-env-vars.sh CATALINA_HOME_PARENT CATALINA_HOME CATALINA_PID CATALINA_OPTS CSPACE_JEESERVER_HOME
 
 #
 # Set CollectionSpace version information
