@@ -30,16 +30,13 @@ ENV COLLECTIONSPACE_TARBALL $APACHE_TOMCAT_NAME-2013-07-09.tar.gz
 #
 # Download and install the CollectionSpace distribution package for the version specified in the environment variable $COLLECTIONSPACE_VERSION
 #
-ENV CSPACE_JEESERVER_HOME $CATALINA_HOME
-RUN wget -q ftp://source.collectionspace.org/pub/collectionspace/releases/$COLLECTIONSPACE_VERSION/$COLLECTIONSPACE_TARBALL
-RUN tar zxvof $COLLECTIONSPACE_TARBALL
-RUN chmod u+x $APACHE_TOMCAT_NAME/bin/*.sh
-RUN mv $COLLECTIONSPACE_TARBALL /usr/local/share
-RUN mv $APACHE_TOMCAT_NAME /usr/local/share
+ADD wget-cspace-distro.sh wget-cspace-distro.sh
+RUN chmod ug+x wget-cspace-distro.sh
+RUN ./wget-cspace-distro.sh
 
 #
 # Get the latest version of the CollectionSpace source for the version specified in the environment variable $COLLECTIONSPACE_VERSION
 #
-RUN cd $HOME/$CSPACE_USERNAME/src/services && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
-RUN cd $HOME/$CSPACE_USERNAME/src/application && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
-RUN cd $HOME/$CSPACE_USERNAME/src/ui && git checkout $COLLECTIONSPACE_GIT_BRANCH && git pull
+ADD update-cspace-src.sh update-cspace-src.sh
+RUN chmod ug+x update-cspace-src.sh
+RUN ./update-cspace-src.sh
