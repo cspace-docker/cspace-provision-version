@@ -6,19 +6,15 @@ MAINTAINER Richard Millet "richard.millet@berkeley.edu"
 #
 ENV APACHE_TOMCAT_NAME apache-tomcat-6.0.33
 ENV CATALINA_HOME_PARENT /usr/local/share
-RUN echo CATALINA_HOME_PARENT=$CATALINA_HOME_PARENT >> /etc/environment
-
 ENV CATALINA_HOME $CATALINA_HOME_PARENT/$APACHE_TOMCAT_NAME
-RUN echo CATALINA_HOME=$CATALINA_HOME >> /etc/environment
-
 ENV CATALINA_PID $CATALINA_HOME/bin/tomcat.pid
-RUN echo CATALINA_PID=$CATALINA_PID >> /etc/environment
-
 ENV CATALINA_OPTS -Xmx1024m -XX:MaxPermSize=384m
-RUN echo CATALINA_OPTS=$CATALINA_OPTS >> /etc/environment
-
 ENV CSPACE_JEESERVER_HOME $CATALINA_HOME
-RUN echo CSPACE_JEESERVER_HOME=$CSPACE_JEESERVER_HOME >> /etc/environment
+
+#
+# Add the environment variables to the /etc/environment system file
+#
+RUN ./add-env-vars.sh $CATALINA_HOME_PARENT $CATALINA_HOME $CATALINA_PID $CATALINA_OPTS $CSPACE_JEESERVER_HOME
 
 #
 # Set CollectionSpace version information
