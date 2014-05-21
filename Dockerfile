@@ -12,14 +12,15 @@ ENV CATALINA_OPTS -Xmx1024m -XX:MaxPermSize=384m
 ENV CSPACE_JEESERVER_HOME $CATALINA_HOME
 
 #
-# Add the environment variables to the /etc/environment system file
+# Add these additional environment variables to the /etc/environment
+# system file
 #
 RUN ./add-env-vars.sh CATALINA_HOME_PARENT CATALINA_HOME CATALINA_PID CATALINA_OPTS CSPACE_JEESERVER_HOME
 
 #
 # Set CollectionSpace version information
 #
-ENV COLLECTIONSPACE_VERSION 3.3
+ENV COLLECTIONSPACE_VERSION 4.1-beta1
 ENV COLLECTIONSPACE_GIT_BRANCH v$COLLECTIONSPACE_VERSION
 ENV COLLECTIONSPACE_TARBALL $APACHE_TOMCAT_NAME-2013-07-09.tar.gz
 
