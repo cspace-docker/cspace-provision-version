@@ -28,15 +28,25 @@ ENV COLLECTIONSPACE_GIT_BRANCH master
 ENV COLLECTIONSPACE_TARBALL $CSPACE_SERVER_FILENAME-$COLLECTIONSPACE_VERSION$TARBALL_EXTENSION
 
 #
-# Download and install the CollectionSpace distribution package for the version specified in the environment variable $COLLECTIONSPACE_VERSION
+# Download and install the CollectionSpace distribution package for the version
+# specified in the environment variable $COLLECTIONSPACE_VERSION
 #
 ADD wget-cspace-distro.sh wget-cspace-distro.sh
 RUN chmod ug+x wget-cspace-distro.sh
 RUN ./wget-cspace-distro.sh
 
 #
-# Get the latest version of the CollectionSpace source for the version specified in the environment variable $COLLECTIONSPACE_VERSION
+# Get the latest version of the CollectionSpace source for the version
+# specified in the environment variable $COLLECTIONSPACE_VERSION
 #
 ADD update-cspace-src.sh update-cspace-src.sh
 RUN chmod ug+x update-cspace-src.sh
 RUN ./update-cspace-src.sh
+
+#
+# Set the host and port of the PostgreSQL database server
+# to which this CollectionSpace server will be connecting.
+#
+# TODO: Use awk or sed to edit the db.host and db.port values
+# in $USER_HOME/$CSPACE_USERNAME/src/services/build.properties
+
