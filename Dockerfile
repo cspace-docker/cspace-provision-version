@@ -43,10 +43,5 @@ ADD update-cspace-src.sh update-cspace-src.sh
 RUN chmod ug+x update-cspace-src.sh
 RUN ./update-cspace-src.sh
 
-#
-# Set the host and port of the PostgreSQL database server
-# to which this CollectionSpace server will be connecting.
-#
-# TODO: Use awk or sed to edit the db.host and db.port values
-# in $USER_HOME/$CSPACE_USERNAME/src/services/build.properties
+
 
