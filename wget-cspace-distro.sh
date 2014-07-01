@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #
-# Download and install the CollectionSpace distribution package for the version specified in the environment variable $COLLECTIONSPACE_VERSION
+# Download and install the CollectionSpace distribution package, for the version
+# specified in the environment variable $COLLECTIONSPACE_VERSION.
 #
 wget -q ftp://source.collectionspace.org/pub/collectionspace/releases/$COLLECTIONSPACE_VERSION/$COLLECTIONSPACE_TARBALL
 tar zxvof $COLLECTIONSPACE_TARBALL
