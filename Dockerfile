@@ -1,3 +1,4 @@
+#
 # cspace-version Dockerfile
 #
 # Dockerfile 2 of 3 to install and configure a CollectionSpace
@@ -36,6 +37,7 @@ RUN ./add-env-vars.sh CATALINA_HOME_PARENT CATALINA_HOME CATALINA_PID CATALINA_O
 #
 # FIXME: Replace the following temporary value, used during 4.1-beta1 testing,
 # with the ENV command directly below:
+#
 ENV COLLECTIONSPACE_VERSION 4.1-beta1
 # ENV COLLECTIONSPACE_GIT_BRANCH v$COLLECTIONSPACE_VERSION
 ENV COLLECTIONSPACE_GIT_BRANCH master
