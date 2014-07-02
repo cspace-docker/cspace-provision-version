@@ -4,6 +4,10 @@
 # Dockerfile 2 of 3 to install and configure a CollectionSpace
 # server instance inside a Docker container.
 #
+# This Dockerfile is specific to and requires Ubuntu Linux,
+# although most of its instructions should likely work with
+# any recent Debian-based Linux distribution.
+#
 
 #
 # Start from the Docker image built by running the
