@@ -34,13 +34,17 @@ ENV CSPACE_JEESERVER_HOME $CATALINA_HOME
 # /etc/environment system file, so that they will be
 # made available to all system users.
 #
-RUN ./add-env-vars.sh CATALINA_HOME_PARENT CATALINA_HOME CATALINA_PID CATALINA_OPTS CSPACE_JEESERVER_HOME
+# (The $SCRIPT_INSTALL_DIR is defined in the cspace-base
+# image's Dockerfile.)
+#
+RUN $SCRIPT_INSTALL_DIR/add-env-vars.sh CATALINA_HOME_PARENT CATALINA_HOME CATALINA_PID CATALINA_OPTS CSPACE_JEESERVER_HOME
 
 #
 # Set CollectionSpace's version information.
 #
-# FIXME: Replace the following temporary value, used during 4.1-beta1 testing,
-# with the ENV command directly below:
+# FIXME: For production, replace the following temporary value,
+# used during 4.1-beta1 testing, with the ENV command directly
+# below this one:
 #
 ENV COLLECTIONSPACE_VERSION 4.1-beta1
 # ENV COLLECTIONSPACE_GIT_BRANCH v$COLLECTIONSPACE_VERSION
@@ -51,17 +55,17 @@ ENV COLLECTIONSPACE_TARBALL $CSPACE_SERVER_FILENAME-$COLLECTIONSPACE_VERSION$TAR
 # Download and install the CollectionSpace distribution package for the version
 # specified in the environment variable $COLLECTIONSPACE_VERSION.
 #
-ADD wget-cspace-distro.sh wget-cspace-distro.sh
+ADD wget-cspace-distro.sh $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 RUN chmod ug+x wget-cspace-distro.sh
-RUN ./wget-cspace-distro.sh
+RUN $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 
 #
 # Check out the CollectionSpace source code, for the version
 # specified in the environment variable $COLLECTIONSPACE_VERSION.
 #
-ADD update-cspace-src.sh update-cspace-src.sh
+ADD update-cspace-src.sh $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 RUN chmod ug+x update-cspace-src.sh
-RUN ./update-cspace-src.sh
+RUN $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 
 
 
