@@ -65,7 +65,7 @@ RUN $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 # specified in the environment variable $COLLECTIONSPACE_VERSION.
 #
 ADD update-cspace-src.sh $SCRIPT_INSTALL_DIR/update-cspace-src.sh
-RUN chmod ug+x update-cspace-src.sh
+RUN chmod ug+x $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 RUN $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 
 
