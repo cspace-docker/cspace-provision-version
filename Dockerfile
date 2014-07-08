@@ -55,7 +55,6 @@ ENV COLLECTIONSPACE_TARBALL $CSPACE_SERVER_FILENAME-$COLLECTIONSPACE_VERSION$TAR
 # Download and install the CollectionSpace distribution package for the version
 # specified in the environment variable $COLLECTIONSPACE_VERSION.
 #
-RUN sudo apt-get install -y wget
 ADD wget-cspace-distro.sh $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 RUN chmod ug+x $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 RUN $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
