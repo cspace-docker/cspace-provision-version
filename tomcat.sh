@@ -17,14 +17,22 @@ TEST=/usr/bin/test
 TOMCAT_USER=cspace
 TOMCAT_HOME=/usr/local/share/apache-tomcat-6.0.33
 TOMCAT_START_SCRIPT=$TOMCAT_HOME/bin/startup.sh
+TOMCAT_FOREGROUND_START_SCRIPT=$TOMCAT_HOME/bin/catalina.sh
 TOMCAT_STOP_SCRIPT=$TOMCAT_HOME/bin/shutdown.sh
  
 $TEST -x $TOMCAT_START_SCRIPT || exit 0
+$TEST -x $TOMCAT_FOREGROUND_START_SCRIPT || exit 0
 $TEST -x $TOMCAT_STOP_SCRIPT || exit 0
  
 start() {
     $ECHO -n "Starting Tomcat"
     su - $TOMCAT_USER -c "$TOMCAT_START_SCRIPT &"
+    $ECHO "."
+}
+
+startforeground() {
+    $ECHO -n "Starting Tomcat in foreground"
+    su - $TOMCAT_USER -c "$TOMCAT_FOREGROUND_START_SCRIPT run"
     $ECHO "."
 }
  
@@ -41,6 +49,9 @@ case "$1" in
     start)
         start
         ;;
+    startforeground)
+        startforeground
+        ;;
     stop)
         stop
         ;;
@@ -50,7 +61,7 @@ case "$1" in
         start
         ;;
     *)
-        $ECHO "Usage: tomcat {start|stop|restart}"
+        $ECHO "Usage: tomcat {start|startforeground|stop|restart}"
         exit 1
 esac
 exit 0
