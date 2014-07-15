@@ -52,12 +52,21 @@ ENV COLLECTIONSPACE_GIT_BRANCH master
 ENV COLLECTIONSPACE_TARBALL $CSPACE_SERVER_FILENAME-$COLLECTIONSPACE_VERSION$TARBALL_EXTENSION
 
 #
-# Download and install the CollectionSpace distribution package for the version
-# specified in the environment variable $COLLECTIONSPACE_VERSION.
+# Download and install the CollectionSpace distribution package
+# for the version specified in the environment variable
+# $COLLECTIONSPACE_VERSION.
 #
 ADD wget-cspace-distro.sh $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 RUN chmod ug+x $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
 RUN $SCRIPT_INSTALL_DIR/wget-cspace-distro.sh
+
+#
+# Set up a service script for starting, stopping, and restarting
+# CollectionSpace, with default run levels.
+#
+ADD tomcat.sh /etc/init.d/tomcat
+RUN chmod 755 /etc/init.d/tomcat
+RUN update-rc.d tomcat defaults
 
 #
 # Check out the CollectionSpace source code, for the version
