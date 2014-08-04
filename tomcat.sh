@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # See http://wiki.openkm.com/index.php/Configure_Tomcat_service_linux
  
