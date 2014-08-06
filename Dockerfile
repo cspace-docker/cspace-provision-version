@@ -76,5 +76,45 @@ ADD update-cspace-src.sh $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 RUN chmod ug+x $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 RUN $SCRIPT_INSTALL_DIR/update-cspace-src.sh
 
+#
+# Perform a full source code build and deployment,
+# from the top layer-down.
+#
+
+#
+# Build the User Interface (UI) layer
+#
+RUN cd $USER_HOME/$CSPACE_USERNAME/src/ui && mvn clean install -DskipTests
+
+# Build the Application layer
+# NOTE: We must build the Application layer before the Services layer
+# since it creates the configuration tool needed to create the Service
+# layer's configuration artifacts; i.e items such as the Nuxeo plugins
+# and service bindings.
+#
+RUN cd $USER_HOME/$CSPACE_USERNAME/src/application && mvn clean install -DskipTests
+
+#
+# Set environment variables needed by the Services layer.
+#
+# The following values are placeholders; they will be replaced by
+# instance-specific values in the third layer's Dockerfile:
+#
+ENV DB_CSADMIN_PASSWORD placeholderpassword
+ENV DB_CSPACE_PASSWORD placeholderpassword
+ENV DB_NUXEO_PASSWORD placeholderpassword
+ENV DB_READER_PASSWORD placeholderpassword
+ENV DB_HOST localhost
+ENV DB_PORT 5432
+ENV CSPACE_INSTANCE_ID _placeholderid
+
+#
+# Build the Services layer
+#
+RUN cd $USER_HOME/$CSPACE_USERNAME/src/services && mvn clean install -DskipTests
+
+
+
+
 
 
